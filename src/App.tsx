@@ -1,12 +1,15 @@
 import "./App.css";
 import { Component } from "react";
 
-interface IProps {
+interface IProps {}
+
+interface IChar {
+  id: string;
   name: string;
 }
 
 interface IState {
-  characters: Array<Object>;
+  characters: Array<IChar>;
 }
 
 class App extends Component<IProps, IState> {
@@ -39,8 +42,8 @@ class App extends Component<IProps, IState> {
   render() {
     return (
       <div className="App">
-        {this.state.characters.map((char) => {
-          return <h1 key={char.key}> {char.name} </h1>;
+        {this.state.characters.map((char: IChar) => {
+          return <h1 key={char.id}> {char.name} </h1>;
         })}
       </div>
     );
