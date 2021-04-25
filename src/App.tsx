@@ -1,10 +1,17 @@
-import logo from "./logo.svg";
 import "./App.css";
 import { Component } from "react";
 
-class App extends Component {
-  constructor() {
-    super();
+interface IProps {
+  name: string;
+}
+
+interface IState {
+  characters: Array<Object>;
+}
+
+class App extends Component<IProps, IState> {
+  constructor(props: IProps) {
+    super(props);
     this.state = {
       characters: [
         {
