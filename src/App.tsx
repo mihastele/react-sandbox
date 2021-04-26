@@ -1,23 +1,27 @@
-import logo from "./logo.svg";
 import "./App.css";
 import { Component } from "react";
+import { CardList } from "./components/card-list/card-list.component";
+import { IProps, IState } from "./definitions/main-defs";
 
-class App extends Component {
-  constructor() {
-    super();
+class App extends Component<IProps, IState> {
+  constructor(props: IProps) {
+    super(props);
     this.state = {
       characters: [
         {
           id: "1",
           name: "Magarac",
+          email: "",
         },
         {
           id: "2",
           name: "Đukela",
+          email: "",
         },
         {
           id: "3",
           name: "Doge",
+          email: "",
         },
       ],
     };
@@ -32,9 +36,7 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-        {this.state.characters.map((char) => {
-          return <h1 key={char.key}> {char.name} </h1>;
-        })}
+        <CardList characters={this.state.characters}></CardList>
       </div>
     );
   }
