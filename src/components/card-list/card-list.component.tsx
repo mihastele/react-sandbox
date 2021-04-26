@@ -4,7 +4,6 @@ import { Card } from "../card/card.component";
 import "./card-list.styles.css";
 
 export const CardList = (props: any) => {
-  console.log(props);
   return (
     <div className="card-list">
       {props.characters.map((char: IChar) => {
