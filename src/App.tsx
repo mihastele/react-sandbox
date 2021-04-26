@@ -24,6 +24,7 @@ class App extends Component<IProps, IState> {
           email: "",
         },
       ],
+      searchField: "",
     };
   }
 
@@ -36,6 +37,10 @@ class App extends Component<IProps, IState> {
   render() {
     return (
       <div className="App">
+	<input type="search" placeholder="Search for Characters" onChange={
+		(e)=>{
+			this.setState({ searchField: e.target.value });
+		}}/>
         <CardList characters={this.state.characters}></CardList>
       </div>
     );
