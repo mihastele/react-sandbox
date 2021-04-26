@@ -1,16 +1,7 @@
 import "./App.css";
 import { Component } from "react";
-
-interface IProps {}
-
-interface IChar {
-  id: string;
-  name: string;
-}
-
-interface IState {
-  characters: Array<IChar>;
-}
+import { CardList } from "./components/card-list/card-list.component";
+import { IProps, IState } from "./definitions/main-defs";
 
 class App extends Component<IProps, IState> {
   constructor(props: IProps) {
@@ -20,14 +11,17 @@ class App extends Component<IProps, IState> {
         {
           id: "1",
           name: "Magarac",
+          email: "",
         },
         {
           id: "2",
           name: "Đukela",
+          email: "",
         },
         {
           id: "3",
           name: "Doge",
+          email: "",
         },
       ],
     };
@@ -42,9 +36,7 @@ class App extends Component<IProps, IState> {
   render() {
     return (
       <div className="App">
-        {this.state.characters.map((char: IChar) => {
-          return <h1 key={char.id}> {char.name} </h1>;
-        })}
+        <CardList characters={this.state.characters}></CardList>
       </div>
     );
   }
