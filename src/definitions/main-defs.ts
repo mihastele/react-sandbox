@@ -12,5 +12,4 @@ export interface ICardEntry {
 
 export interface IState {
   characters: Array<IChar>;
-  searchField: string;
 }
