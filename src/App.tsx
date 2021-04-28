@@ -1,5 +1,5 @@
 import './App.css'
-import React, { Component, ReactNode } from 'react'
+import React, { ChangeEventHandler, Component, ReactNode } from 'react'
 import { CardList } from './components/card-list/card-list.component'
 import { IChar, IProps, IState } from './definitions/main-defs'
 import { SearchBox } from './components/search-box/search-box.component'
@@ -8,25 +8,11 @@ class App extends Component<IProps, IState> {
 	constructor(props: IProps) {
 		super(props)
 		this.state = {
-			characters: [
-				{
-					id: '1',
-					name: 'Magarac',
-					email: '',
-				},
-				{
-					id: '2',
-					name: 'Đukela',
-					email: '',
-				},
-				{
-					id: '3',
-					name: 'Doge',
-					email: '',
-				},
-			],
+			characters: [],
 			searchField: '',
 		}
+
+		this.handleChangeNonArrow = this.handleChangeNonArrow.bind(this)
 	}
 
 	componentDidMount(): void {
@@ -35,16 +21,24 @@ class App extends Component<IProps, IState> {
 			.then((users) => this.setState({ characters: users }))
 	}
 
+	handleChange = (e: any): void => {
+		this.setState({searchField: e.target.value})
+	}
+
+	handleChangeNonArrow(e: any): void {
+		this.setState({searchField: e.target.value})
+	}
+
 	render(): ReactNode {
 		const { characters, searchField } = this.state
-		const filteredCharacters = this.state.characters.filter((f: IChar) => {
+		const filteredCharacters = characters.filter((f: IChar) => {
 			return f.name.toLowerCase().includes(searchField.toLowerCase())
 		})
 		return (
 			<div className="App">
 				<SearchBox
 					placeholder="Search for Characters"
-					handleChange={(e) => this.setState({searchField: e.target.value})}
+					handleChange={this.handleChange}
 				/>
 				<CardList characters={filteredCharacters}></CardList>
 			</div>
