@@ -1,7 +1,8 @@
 import "./App.css";
-import { Component } from "react";
+import { Component, SyntheticEvent } from "react";
 import { CardList } from "./components/card-list/card-list.component";
-import { IProps, IState } from "./definitions/main-defs";
+import { IChar, IProps, IState } from "./definitions/main-defs";
+import { SearchBox } from "./components/search-box/search-box.component";
 
 class App extends Component<IProps, IState> {
   constructor(props: IProps) {
@@ -35,13 +36,19 @@ class App extends Component<IProps, IState> {
   }
 
   render() {
+    const { characters, searchField } = this.state;
+    const filteredCharacters = this.state.characters.filter((f: IChar) => {
+      return f.name.toLowerCase().includes(searchField.toLowerCase());
+    });
     return (
       <div className="App">
-	<input type="search" placeholder="Search for Characters" onChange={
-		(e)=>{
-			this.setState({ searchField: e.target.value });
-		}}/>
-        <CardList characters={this.state.characters}></CardList>
+        <SearchBox
+          placeholder="Search for Characters"
+          handleChange={(e) => {
+            //this.setState({ searchField: e.target.value });
+          }}
+        />
+        <CardList characters={filteredCharacters}></CardList>
       </div>
     );
   }
